@@ -9,6 +9,7 @@
          })
      });
 
+
      $('#resultat').click(function () {
          $.get('/api/vote', function (data) {
 
@@ -44,19 +45,21 @@
              firstname: _firstname,
              lastname: _lastname,
              age: _age
-         }).done(function (data) {
-             alert("data loaded: " + data);
+         }).done(function (me) {
+             alert("data loaded: " + me.id);
+             var _p = '<p>' + ' Votre id est: ' + me.id + '</p>';
+             $('#ident').append(_p);
          });
      });
 
      $('#vote1').submit(function (e) {
          e.preventDefault();
 
-         var _lastname = $('#lastname1').val(),
+         var _idvotant = $('#idvotant').val(),
              _vote = $('#vote').val();
 
          $.post('api/vote', {
-             lastname: _lastname,
+             idvotant: _idvotant,
              vote: _vote
          }).done(function (data) {
              alert("Merci d'avoir voté");
@@ -84,6 +87,10 @@
 
      $("#vot").click(function () {
          $("#vote1").fadeIn("slow");
+     });
+
+     $("#vv").click(function () {
+         $("#ident").fadeOut("slow");
      });
 
      $("#vv").click(function () {
